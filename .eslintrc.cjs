@@ -1,6 +1,7 @@
 // @see https://eslint.bootcss.com/docs/rules/
 
 module.exports = {
+  // 运行环境
   env: {
     browser: true,
     es2021: true,
@@ -21,11 +22,17 @@ module.exports = {
   },
   /* 继承已有的规则 */
   extends: [
+    //全部规则默认是关闭的,这个配置项开启推荐规则,推荐规则参照文档
+    //比如:函数不能重名、对象不能出现重复key
     'eslint:recommended',
+    //vue3语法规则
     'plugin:vue/vue3-essential',
+    //ts语法规则
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
   ],
+  //ESLint支持使用第三方插件。在使用插件之前，您必须使用npm安装它
+  //该eslint-plugin-前缀可以从插件名称被省略
   plugins: ['vue', '@typescript-eslint'],
   /*
    * "off" 或 0    ==>  关闭规则

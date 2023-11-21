@@ -1,4 +1,4 @@
 import { createPinia } from 'pinia'
-let pinia = createPinia()
+const pinia = createPinia()
 
 export default pinia

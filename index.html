@@ -11,10 +11,195 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + Vue + TS</title>
+    <title>Vite + Vue + TS 硅谷甄选</title>
   </head>
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
+
+<!-- 
+### 2.1项目初始化
+今天来带大家从0开始搭建一个vue3版本的后台管理系统。一个项目要有统一的规范，
+需要使用eslint+stylelint+prettier来对我们的代码质量做检测和修复，
+需要使用husky来做commit拦截，
+需要使用commitlint来统一提交规范，
+需要使用preinstall来统一包管理工具。
+
+#### 2.1.1环境准备
+- node v16.14.2 
+- pnpm 8.0.0
+
+如何检查是否安装了node.js
+在命令提示符面板中，输入命令：node -v，出现版本号即为已安装
+其他：pnpm -v    npm -v    vue -V(大写V)
+
+#### 2.1.2初始化项目
+本项目使用vite进行构建，vite官方中文文档参考：[cn.vitejs.dev/guide/
+**pnpm:performant npm ，意味“高性能的 npm”。[pnpm](https://so.csdn.net/so/search?q=pnpm&spm=1001.2101.3001.7020)
+由npm/yarn衍生而来，解决了npm/yarn内部潜在的bug，极大的优化了性能，
+扩展了使用场景。被誉为“最先进的包管理工具”**
+
+pnpm安装指令
+```
+npm i -g pnpm
+```
+
+项目初始化命令:
+```
+pnpm create vite
+```
+
+进入到项目根目录pnpm install安装全部依赖.
+安装完依赖运行程序:pnpm run dev
+运行完毕项目跑在http://127.0.0.1:5173/,可以访问你得项目啦
+-->
+
+<!-- 
+  index.html:启动页面
+  <div id="app">为后续的vue文件提供可替换的壳标签
+
+  在一个 Vite 项目中，index.html 在项目最外层
+  index.html 是该 Vite 项目的入口文件。
+  Vite 将 index.html 视为源码和模块图的一部分。
+  Vite 解析 <script type="module" src="..."> ，这个标签指向你的 JavaScript 源码。
+
+  Vite 天然支持引入 .ts 文件。请注意，Vite 仅执行 .ts 文件的转译工作，
+  并不执行任何类型检查。并假定类型检查已经被你的 IDE 或构建过程处理了。
+
+  main.js:入口文件，功能有两个：
+  1、导入vue框架；
+  2、将App.vue的内容挂载(替换)到index.html的<div id="app"/>标签
+
+  App.vue：第一个vue文件
+
+  让 Vue 应用正确地运行起来，需要有一个入口文件来进行一些必要的配置，这个入口文件就是 main.js。
+  而 App.vue 则是 Vue 应用的根组件，所有其他组件都将嵌套在 App.vue 组件之内
+ -->
+<!-- 
+  "dev": "vite --open",  --open的作用：浏览器自动打开  package.json
+  -->
+<!-- 
+  ### 项目配置
+
+  #### 一、eslint配置
+  ESLint的目标是提供一个插件化的**javascript代码检测工具**
+  首先安装eslint
+  ```
+  pnpm i eslint -D
+  ```
+  生成配置文件:.eslint.cjs
+  ```
+  npx eslint --init
+  ```
+  修改.eslintrc.cjs配置文件
+  略
+  运行脚本
+  pnpm run lint
+  pnpm run fix 
+   -->
+<!-- 
+  #### 二、配置**prettier**
+  有了eslint，为什么还要有prettier？eslint针对的是javascript，他是一个检测工具，包含js语法
+  以及少部分格式问题，在eslint看来，语法对了就能保证代码正常运行，格式问题属于其次；
+  而prettier属于格式化工具，它看不惯格式不统一，所以它就把eslint没干好的事接着干，另外，prettier支持
+  包含js在内的多种语言。
+  总结起来，**eslint和prettier这俩兄弟一个保证js代码质量，一个保证代码美观。**
+
+  ##### 2.1安装依赖包
+  ```
+  pnpm install -D eslint-plugin-prettier prettier eslint-config-prettier
+  ```
+  eslint-config-prettier: 负责关掉 eslint 所有格式相关的规则
+  eslint-plugin-prettier：将 prettier 整合进 eslint，作为 eslint 一条规则来运行prettier
+
+  ##### 2.2.prettierrc.json添加规则
+  ```
+  {
+    "singleQuote": true,  // 单引号
+    "semi": false,   // 是否在行尾加分号
+    "bracketSpacing": true,  //  对象左右两侧都需要空格
+    "htmlWhitespaceSensitivity": "ignore",   // vue template 中的结束标签结尾尖括号掉到了下一行
+    "endOfLine": "auto",   //配置换行符格式为auto
+    "trailingComma": "all",   // 默认none, 可选 none|es5|all。es5 包括es5中的数组、对象最后一个元素后会加逗号, all 包括函数对象等所有可选
+    "tabWidth": 2    // tab使用2个空格
+    "arrowParens": "avoid", // 箭头函数参数括号，默认avoid 可选 avoid| always,avoid 能省略括号的时候就省略；always 总是有括号
+    "printWidth": 100, // 单行代码字符数量最长100，超过自动折行
+  }
+  ```
+  通过pnpm run lint去检测语法，如果出现不规范格式,通过pnpm run fix 修改
+  -->
+<!-- 
+  #### 三、配置stylelint
+  [stylelint](https://stylelint.io/)为css的lint工具。可格式化css代码，检查css语法错误与不合理的写法，指定css书写顺序等。
+  我们的项目中使用scss作为预处理器，安装以下依赖：
+  pnpm add sass sass-loader stylelint postcss postcss-scss postcss-html stylelint-config-prettier stylelint-config-recess-order stylelint-config-recommended-scss stylelint-config-standard stylelint-config-standard-vue stylelint-scss stylelint-order stylelint-config-standard-scss -D
+
+  stylelintrc.cjs`**配置文件**
+  略
+
+  **当我们运行`pnpm run format`的时候，会把代码直接格式化**
+  -->
+
+  <!-- 
+  #### 四、配置husky
+  在上面我们已经集成好了我们代码校验工具，但是需要每次手动的去执行命令才会格式化我们的代码。
+  如果有人没有格式化就提交了远程仓库中，那这个规范就没什么用。所以我们需要强制让开发人员按
+  照代码规范来提交。
+  要做到这件事情，就需要利用husky在代码提交之前触发git hook(git在客户端的钩子)，然后执行
+  `pnpm run format`来自动的格式化我们的代码。
+
+  安装`husky`
+  ```
+  pnpm install -D husky
+  ```
+  执行
+  ```
+  npx husky-init
+  ```
+  会在根目录下生成个一个.husky目录，在这个目录下面会有一个pre-commit文件，这个文件里面的
+  命令在我们执行commit的时候就会执行
+  在`.husky/pre-commit`文件添加如下命令：
+  ```
+  #!/usr/bin/env sh
+  . "$(dirname -- "$0")/_/husky.sh"
+  pnpm run format
+  ```
+  当我们对代码进行commit操作的时候，就会执行命令，对代码进行格式化，然后再提交。
+  -->
+  <!-- 
+  #### 五、配置commitlint
+  对于我们的commit信息，也是有统一规范的，不能随便写,要让每个人都按照统一的标准来执行，我们可以利用**commitlint**来实现。
+  安装包
+  ```
+  pnpm add @commitlint/config-conventional @commitlint/cli -D
+  ```
+  添加配置文件，新建`commitlint.config.cjs`(注意是cjs)
+  配置结束，现在当我们填写`commit`信息的时候，前面就需要带着下面的`subject`
+        ```
+        'feat',//新特性、新功能
+        'fix',//修改bug
+        'docs',//文档修改
+        'style',//代码格式修改, 注意不是 css 修改
+        'refactor',//代码重构
+        'perf',//优化相关，比如提升性能、体验
+        'test',//测试用例修改
+        'chore',//其他修改, 比如改变构建流程、或者增加依赖库、工具等
+        'revert',//回滚到上一个版本
+        'build',//编译相关的修改，例如发布版本、对项目构建或者依赖的改动
+        ```
+  配置husky
+  ```
+  npx husky add .husky/commit-msg 
+  ```
+  在生成的commit-msg文件中添加下面的命令
+  ```
+  #!/usr/bin/env sh
+  . "$(dirname -- "$0")/_/husky.sh"
+  pnpm commitlint
+  ```
+  当我们 commit 提交信息时，就不能再随意写了，必须是 git commit -m 'fix: xxx' 符合类型的
+  才可以，**需要注意的是类型的后面需要用英文的 :，并且冒号后面是需要空一格的，这个是不能省
+  略的
+   -->

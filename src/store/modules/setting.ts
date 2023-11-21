@@ -7,7 +7,7 @@
  */
 import { defineStore } from 'pinia'
 
-let useLayOutSettingStore = defineStore('SettingStore', {
+const useLayOutSettingStore = defineStore('SettingStore', {
   state: () => {
     return {
       isCollapse: false,

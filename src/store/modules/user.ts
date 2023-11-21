@@ -17,7 +17,7 @@ import type { UserState } from './types/types'
 import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from '@/utils/token'
 import { constantRoute, asyncRoute, anyRoute } from '@/router/routes'
 
-// @ts-ignore
+// @ts-expect-error
 import cloneDeep from 'lodash/cloneDeep'
 
 function filterAsyncRoute(asyncRoute: any, routes: any) {
@@ -31,7 +31,7 @@ function filterAsyncRoute(asyncRoute: any, routes: any) {
   })
 }
 
-let useUserStore = defineStore('User', {
+const useUserStore = defineStore('User', {
   // 小仓库存储数据的地方
   state: (): UserState => {
     return {
@@ -46,7 +46,7 @@ let useUserStore = defineStore('User', {
   actions: {
     //用户登录方法
     async userLogin(data: LoginFormData) {
-      let res: LoginResponseData = await reqLogin(data)
+      const res: LoginResponseData = await reqLogin(data)
       // success=>token
       // error=>error.message
       if (res.code === 200) {
@@ -59,12 +59,12 @@ let useUserStore = defineStore('User', {
       }
     },
     async userInfo() {
-      let res: userInfoResponseData = await reqUserInfo()
+      const res: userInfoResponseData = await reqUserInfo()
 
       if (res.code === 200) {
         this.username = res.data.name as string
         this.avatar = res.data.avatar as string
-        let userAsyncRoute = filterAsyncRoute(
+        const userAsyncRoute = filterAsyncRoute(
           cloneDeep(asyncRoute),
           res.data.routes,
         )
@@ -78,7 +78,7 @@ let useUserStore = defineStore('User', {
       }
     },
     async userLogout() {
-      let res = await reqLogOut()
+      const res = await reqLogOut()
       if (res.code === 200) {
         this.token = ''
         this.username = ''
