@@ -20,12 +20,12 @@ import pinia from './store'
 import './permission'
 import { isHasButton } from './directive/has'
 
-const app = createApp(App)   // 获取应用实例对象
+const app = createApp(App) // 获取应用实例对象
 isHasButton(app)
 app.use(globalComponent)
 app.use(router)
 app.use(pinia)
-app.mount('#app')     // 将应用挂载到挂载点上
+app.mount('#app') // 将应用挂载到挂载点上
 // createApp(App).mount('#app')  // 写法二
 
 // ## 三、项目集成
@@ -60,7 +60,7 @@ app.mount('#app')     // 将应用挂载到挂载点上
 // }
 // ```
 // 配置完毕可以测试element-plus组件与图标的使用.
-// 
+//
 // !!!! 按需导入#
 // 您需要使用额外的插件来导入要使用的组件。
 
