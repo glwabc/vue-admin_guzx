@@ -40,12 +40,16 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         localEnabled: command === 'serve',
       }),
     ],
-    resolve: { alias: { '@': path.resolve('./src') } },
+    // 在开发项目的时候文件与文件关系可能很复杂，因此我们需要给src文件夹配置一个别名！！！
+    // path.resolve方法是把一个路径或路径片段的序列解析为一个绝对路径。
+    // resolve在传入非 / 路径时，会自动加上当前目录形成一个绝对路径
+    resolve: { alias: { '@': path.resolve('./src') } },   // 相对路径别名配置，使用 @ 代替 src
+    // 配置scss全局变量
     css: {
       preprocessorOptions: {
         scss: {
           javascriptEnabled: true,
-          additionalData: '@import "./src/styles/variable.scss";',
+          additionalData: '@import "./src/styles/variable.scss";', //后面的`;`不要忘记，不然会报错**!
         },
       },
     },

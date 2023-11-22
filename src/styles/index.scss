@@ -1,1 +1,24 @@
+// 引入清除默认样式
 @import './reset.scss';
+
+// ### 集成sass
+// 我们目前在组件内部已经可以使用scss样式,因为在配置styleLint工具的时候，项目当中已经
+// 安装过sass sass-loader,因此我们再组件内可以使用scss语法！！！需要加上lang="scss"
+// ```
+// <style scoped lang="scss"></style>
+// ```
+// 接下来我们为项目添加一些全局的样式
+// 在src/styles目录下创建一个index.scss文件，当然项目中需要用到清除默认样式，因此
+// 在index.scss引入reset.scss
+// ```
+// @import reset.scss
+// ```
+// 在入口文件引入
+// ```
+// import '@/styles'
+// ```
+// 但是你会发现在src/styles/index.scss全局样式文件中没有办法使用$变量.因此需要给项目中
+// 引入全局变量$.
+// 在style/variable.scss创建一个variable.scss文件！
+// 在vite.config.ts文件配置：略
+// 配置完毕你会发现scss提供这些全局变量可以在组件样式中使用了！！！

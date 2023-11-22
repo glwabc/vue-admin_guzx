@@ -56,6 +56,15 @@ export const constantRoute = [
       hidden: true,
     },
   },
+  {
+    path: '/test',
+    component: () => import('@/views/test/index.vue'),
+    name: 'test页面',
+    meta: {
+      title: 'test_page',
+      hidden: true,
+    },
+  },
 ]
 
 export const asyncRoute = [

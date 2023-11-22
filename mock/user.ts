@@ -5,6 +5,7 @@
  * @LastEditors: Huccct
  * @LastEditTime: 2023-05-20 10:50:25
  */
+// createUserList:此函数执行会返回一个数组，数组里面包含两个用户信息
 function createUserList() {
   return [
     {
@@ -34,6 +35,9 @@ function createUserList() {
   ]
 }
 
+// 对外暴露一个数组：数组里面包含两个接口
+// 登录的假接口
+// 获取用户信息的假接口
 export default [
   // 用户登录接口
   {
